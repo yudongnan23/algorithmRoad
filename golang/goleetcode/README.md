@@ -1,0 +1,13 @@
+# 算法golang语言实现,主要实现leetcode专题算法;下一级目录为:
+- array_string
+    - array_dominantIndex.go:数组中最大数至少为其他数的两倍
+    - array_findDiagonalOrder.go:对角线遍历二维数组
+    - array_generate.go:杨辉三角
+    - array_pivotIndex.go:数组中的中心索引
+    - array_plusOne.go:数组组成的数加一
+    - array_spiralOrder.go:顺时针遍历二维数组
+    - pointer_arrayPairSUm.go:数对最小值之和的最大值
+    - pointer_reverseString.go:反转字符数组
+    - string_addBinary.go:二进制求和
+    - string_longestCommonPrefix.go:查找字符串最大公共子字符串
+    - string_strStr.go:查找第一次出现目标字符串的索引位置

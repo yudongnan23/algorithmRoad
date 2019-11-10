@@ -3,4 +3,4 @@
 
 - I. pyleetcode
   - array_string: 字符串与数组
-- II. gonowcoder
+- II. gonowcode

@@ -1,0 +1,13 @@
+# 算法python语言实现,主要实现leetcode专题算法;下一级目录为:
+- array_string
+    - array_dominantIndex.py:数组中最大数至少为其他数的两倍
+    - array_findDiagonalOrder.py:对角线遍历二维数组
+    - array_generate.py:杨辉三角
+    - array_pivotIndex.py:数组中的中心索引
+    - array_plusOne.py:数组组成的数加一
+    - array_spiralOrder.py:顺时针遍历二维数组
+    - pointer_arrayPairSUm.py:数对最小值之和的最大值
+    - pointer_reverseString.py:反转字符数组
+    - string_addBinary.py:二进制求和
+    - string_longestCommonPrefix.py:查找字符串最大公共子字符串
+    - string_strStr.py:查找第一次出现目标字符串的索引位置
