@@ -1,4 +1,4 @@
-# 算法题python语言实现 题目源主要是leetcode和牛客网, 下一级索引为:
+# 算法python语言实现, 主要来自leetcode和牛客网, 下一级索引为:
 
 
 - I. pyleetcode
