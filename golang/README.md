@@ -2,5 +2,5 @@
 
 
 - I. goleetcode
-  - array_string: 字符串与数组
-- II. gonowcode
+  - array_string: 字符串与数组专题讲座
+  - linkList: 链表专题讲座
