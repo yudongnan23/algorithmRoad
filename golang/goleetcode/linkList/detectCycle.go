@@ -3,8 +3,7 @@
 	为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置
 	（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
 	说明：不允许修改给定的链表。
- */
-
+*/
 
 /*
 	思路：定义快慢指针，快指针一次走两步，慢指针一次走一步，当两指针相遇时，将快指针放到起点，与慢指针同时一次走一步，两指针再次相遇时
@@ -16,21 +15,20 @@
 */
 package main
 
-
 func detectCycle(head *ListNode) *ListNode {
 	// 定义快慢指针，初始化为链表的头结点
 	slow := head
 	fast := head
 	// 指针往前走的必要条件，否则会抛出异常
-	for ; slow != nil && fast.Next != nil && fast.Next.Next != nil;{
+	for slow != nil && fast.Next != nil && fast.Next.Next != nil {
 		// 慢指针走一步
 		slow = slow.Next
 		// 快指针走两步
 		fast = fast.Next.Next
 		// 两指针第一次相遇，将快指针放置起点，即头结点与慢指针同时一次一步往下走直到相遇即为环的入口点
-		if slow == fast{
+		if slow == fast {
 			fast = head
-			for ; slow != fast;{
+			for slow != fast {
 				slow = slow.Next
 				fast = fast.Next
 			}
