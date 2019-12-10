@@ -13,6 +13,7 @@
 		可知，两指针第一次相遇时，快慢指针距环的第一节点与头结点距环的第一个结点的距离相等。
 
 */
+
 package main
 
 func detectCycle(head *ListNode) *ListNode {
