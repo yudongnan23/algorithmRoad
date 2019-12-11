@@ -58,13 +58,13 @@ func dominantIndex(nums []int) int {
 
 // 获取切片最大数函数
 func get_max_num(nums []int)(int, int){
-var max_index int
-var max_num int
-for index, num := range nums{
-if num > max_num{
-max_num = num
-max_index = index
-}
-}
-return max_index, max_num
+	var max_index int
+	var max_num int
+	for index, num := range nums{
+		if num > max_num{
+			max_num = num
+			max_index = index
+		}
+	}
+	return max_index, max_num
 }
