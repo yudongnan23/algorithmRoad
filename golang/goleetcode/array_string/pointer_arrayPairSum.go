@@ -3,6 +3,9 @@
 	使得从1 到 n 的 min(ai, bi) 总和最大。
  */
 
+/*
+    思路：首先需要对数组进行从小到大进行排序，再依次构造两两数对，才能使得所有数对的最小值之和最大
+*/
 
 package main
 
@@ -12,7 +15,7 @@ import (
 )
 
 
-// 方法一
+// 方法一，自定义排序函数与min函数
 func arrayPairSum(nums []int) int{
 	var result int
 	if len(nums) == 0{
@@ -53,7 +56,7 @@ func main() {
 }
 
 
-// 方法二
+// 方法二，调用sort包中Ints排序函数对切片进行排序
 func arrayPairSum(nums []int) int{
 	var result int
 	if len(nums) == 0{
