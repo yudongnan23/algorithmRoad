@@ -24,7 +24,7 @@
                      若不相等，将队首元素的索引加1对队列长度进行求余即为新队首元素的索引。
 */
 
-package queueAndStack
+package main
 
 type MyCircularQueue struct {
 	start  int
