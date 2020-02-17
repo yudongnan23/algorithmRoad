@@ -21,7 +21,6 @@ class Solution:
         return result
 
     def recursive_judge(self, arr: list, cur_index: int, S: int) -> bool:
-        print(S, cur_index)
         if S == 0 or arr[cur_index] == S:
             return True
         elif cur_index == 0:
