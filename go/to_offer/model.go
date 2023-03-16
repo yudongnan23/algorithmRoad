@@ -23,3 +23,9 @@ type LinkedList struct {
 	tail        *doubleLinkedListNode
 	nodeMapping map[byte]*doubleLinkedListNode
 }
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
