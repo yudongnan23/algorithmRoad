@@ -9,5 +9,5 @@ func reversePrint(head *ListNode) []int {
 		p = p.Next
 		i--
 	}
-	return values[i:]
+	return values[i+1:]
 }
