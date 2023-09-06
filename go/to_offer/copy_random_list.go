@@ -1,52 +1,67 @@
 package to_offer
 
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Next *Node
+ *     Random *Node
+ * }
+ */
+
 func copyRandomList(head *Node) *Node {
 	if head == nil {
 		return nil
 	}
 
-	old2NewMapping := make(map[*Node]*Node, 0)
-	new2OldMapping := make(map[*Node]*Node, 0)
-	randomMapping := make(map[*Node]*Node, 0)
+	newRandom2OldMap := make(map[*Node]*Node, 0)
+	old2NewMap := make(map[*Node]*Node, 0)
+	var newHead *Node
 
-	newHead := Node{
-		Val: head.Val,
-	}
+	newP := newHead
+	p := head
+	for {
+		if p == nil {
+			break
+		}
 
-	new2OldMapping[&newHead] = head
-	old2NewMapping[head] = &newHead
-	if head.Random != nil {
-		randomMapping[head] = head.Random
-	}
-
-	newP := &newHead
-	p := head.Next
-
-	for p != nil {
-		newNode := Node{
+		newNode := &Node{
 			Val: p.Val,
 		}
-		newP.Next = &newNode
-		old2NewMapping[p] = &newNode
-		new2OldMapping[&newNode] = p
 
+		old2NewMap[p] = newNode
 		if p.Random != nil {
-			randomMapping[p] = p.Random
+			newRandom2OldMap[newNode] = p.Random
 		}
 
-		newP = newP.Next
 		p = p.Next
-	}
-
-	newP = &newHead
-	for newP != nil {
-		random, ok := randomMapping[new2OldMapping[newP]]
-		if ok {
-			newP.Random = old2NewMapping[random]
+		if newHead == nil {
+			newHead = newNode
+			newP = newNode
+			continue
 		}
 
+		newP.Next = newNode
 		newP = newP.Next
 	}
 
-	return &newHead
+	newP = newHead
+
+	for {
+		if newP == nil {
+			break
+		}
+
+		old, ok := newRandom2OldMap[newP]
+		if !ok {
+			newP = newP.Next
+			continue
+		}
+
+		newRandom := old2NewMap[old]
+		newP.Random = newRandom
+		newP = newP.Next
+	}
+
+	return newHead
 }

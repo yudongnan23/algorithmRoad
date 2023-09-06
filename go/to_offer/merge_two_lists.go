@@ -1,48 +1,49 @@
 package to_offer
 
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	var newHead *ListNode
-	var p *ListNode
+	if l1 == nil {
+		return l2
+	}
 
-	for l1 != nil || l2 != nil {
-		if l1 == nil {
-			if newHead == nil {
-				return l2
-			}
+	if l2 == nil {
+		return l1
+	}
 
-			p.Next = l2
-			return newHead
+	minNode, maxNode := sortNode(l1, l2)
+	newHead := minNode
+
+	p1 := minNode.Next
+	p2 := maxNode
+
+	p := newHead
+
+	for {
+		if p1 == nil {
+			p.Next = p2
+			break
 		}
 
-		if l2 == nil {
-			if newHead == nil {
-				return l1
-			}
-
-			p.Next = l1
-			return newHead
+		if p2 == nil {
+			p.Next = p1
+			break
 		}
 
-		val := l1.Val
-		if l2.Val < val {
-			val = l2.Val
-			l2 = l2.Next
-		} else {
-			l1 = l1.Next
-		}
+		minNode, maxNode = sortNode(p1, p2)
 
-		node := ListNode{
-			Val: val,
-		}
+		p.Next = minNode
+		p = p.Next
 
-		if newHead == nil {
-			newHead = &node
-			p = newHead
-		} else {
-			p.Next = &node
-			p = p.Next
-		}
+		p1 = maxNode
+		p2 = minNode.Next
 	}
 
 	return newHead
+
+}
+
+func sortNode(l1, l2 *ListNode) (*ListNode, *ListNode) {
+	if l1.Val > l2.Val {
+		return l2, l1
+	}
+	return l1, l2
 }
