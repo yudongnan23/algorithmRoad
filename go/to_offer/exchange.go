@@ -5,16 +5,31 @@ func exchange(nums []int) []int {
 		return nil
 	}
 
-	l := 0
-	for r := 1; r < len(nums); r++ {
-		if nums[r]%2 == 1 {
-			nums[l], nums[r] = nums[r], nums[l]
+	evenIndex := 0
+	rightIndex := 0
+
+	for {
+		if rightIndex == len(nums) {
+			return nums
 		}
 
-		if nums[l]%2 == 1 {
-			l = l + 1
+		if !isOdd(nums[rightIndex]) {
+			rightIndex++
+			continue
 		}
+
+		change(nums, rightIndex, evenIndex)
+		evenIndex++
+		rightIndex++
 	}
+}
 
-	return nums
+func isOdd(n int) bool {
+	return n%2 == 1
+}
+
+func change(nums []int, i, j int) {
+	temp := nums[i]
+	nums[i] = nums[j]
+	nums[j] = temp
 }
