@@ -4,7 +4,7 @@ import (
 	"math/big"
 )
 
-func fib(n int) {
+func fib(n int) int {
 	if n <= 1 {
 		return n
 	}
