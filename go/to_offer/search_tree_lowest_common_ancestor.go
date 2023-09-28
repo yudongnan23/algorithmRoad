@@ -5,7 +5,7 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 		return nil
 	}
 
-	maxNode, minNode := sortNode(p, q)
+	maxNode, minNode := sortNodeII(p, q)
 
 	return dfsI(root, maxNode, minNode)
 }
