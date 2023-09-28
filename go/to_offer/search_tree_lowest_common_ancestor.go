@@ -5,12 +5,12 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 		return nil
 	}
 
-	maxNode, minNode := sortNodeII(p, q)
+	maxNode, minNode := sortNode(p, q)
 
-	return backTracing(root, maxNode, minNode)
+	return dfsI(root, maxNode, minNode)
 }
 
-func backTracing(root, maxNode, minNode *TreeNode) *TreeNode {
+func dfsI(root, maxNode, minNode *TreeNode) *TreeNode {
 	if root.Val < maxNode.Val && root.Val > minNode.Val {
 		return root
 	}
@@ -24,10 +24,10 @@ func backTracing(root, maxNode, minNode *TreeNode) *TreeNode {
 	}
 
 	if root.Val < minNode.Val {
-		return lowestCommonAncestor(root.Right, minNode, maxNode)
+		return dfsI(root.Right, maxNode, minNode)
 	}
 
-	return lowestCommonAncestor(root.Left, minNode, maxNode)
+	return dfsI(root.Left, maxNode, minNode)
 }
 
 func sortNodeII(p, q *TreeNode) (*TreeNode, *TreeNode) {
