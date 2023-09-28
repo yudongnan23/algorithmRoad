@@ -7,10 +7,10 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 
 	maxNode, minNode := sortNodeII(p, q)
 
-	return backTraceing(root, maxNode, minNode)
+	return backTracing(root, maxNode, minNode)
 }
 
-func backTraceing(root, maxNode, minNode *TreeNode) *TreeNode {
+func backTracing(root, maxNode, minNode *TreeNode) *TreeNode {
 	if root.Val < maxNode.Val && root.Val > minNode.Val {
 		return root
 	}
