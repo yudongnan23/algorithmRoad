@@ -1,22 +1,21 @@
 package to_offer
 
-import (
-	"math/big"
-)
+const mod = 1000000007
 
 func fib(n int) int {
-	if n <= 1 {
+	if n < 2 {
 		return n
 	}
 
-	dynamic := make([]*big.Int, n+1)
-	dynamic[0] = big.NewInt(0)
-	dynamic[1] = big.NewInt(1)
+	jjj := 0
+	j := 0
+	jj := 1
 
-	for i := 2; i <= n; i++ {
-		adder := big.NewInt(0)
-		dynamic[i] = adder.Add(dynamic[i-1], dynamic[i-2])
+	for n-2 >= 0 {
+		jjj = (j + jj) % mod
+		jj, j = jjj, jj
+		n--
 	}
-	modder := big.NewInt(0)
-	return int(modder.Mod(dynamic[n], big.NewInt(1000000007)).Int64())
+
+	return jjj
 }
