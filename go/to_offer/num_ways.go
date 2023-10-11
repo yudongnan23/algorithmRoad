@@ -1,23 +1,15 @@
 package to_offer
 
-import (
-	"math/big"
-)
+func trainWays(num int) int {
+	jjj := 1
+	jj := 1
+	j := 1
 
-func numWays(n int) int {
-	if n < 2 {
-		return 1
+	for num-2 >= 0 {
+		jjj = (jj + j) % mod
+		jj, j = jjj, jj
+		num--
 	}
 
-	dynamic := make([]*big.Int, n+1)
-	dynamic[0] = big.NewInt(1)
-	dynamic[1] = big.NewInt(1)
-
-	for i := 2; i <= n; i++ {
-		adder := big.NewInt(0)
-		dynamic[i] = adder.Add(dynamic[i-1], dynamic[i-2])
-	}
-
-	modder := big.NewInt(0)
-	return int(modder.Mod(dynamic[n], big.NewInt(1000000007)).Int64())
+	return jjj
 }
