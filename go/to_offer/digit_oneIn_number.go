@@ -1,5 +1,6 @@
 package to_offer
 
+// TODO again
 func digitOneInNumber(num int) int {
 	base := 1
 	count := 0
