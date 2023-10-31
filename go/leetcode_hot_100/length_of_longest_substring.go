@@ -5,47 +5,27 @@ func lengthOfLongestSubstring(s string) int {
 		return 0
 	}
 
-	var left int16 = 0
-	var right int16 = 1
+	max := 1
+	m := make(map[byte]int, 0)
 
-	strIndexMapping := map[byte]int16{
-		s[0]: 0,
-	}
+	l := 0
+	r := 1
 
-	length := int16(len(s))
-	var max int16
-	for right < length {
-		index, ok := strIndexMapping[s[right]]
-		if ok && index >= left {
-			leftLen := index - left + 1
-			rightLen := right - index
-			curMax := maxThree(leftLen, rightLen, right-left)
-			if curMax > max {
-				max = curMax
+	m[s[l]] = 0
+
+	for r < len(s) {
+		index, ok := m[s[r]]
+		if !ok || index < l {
+			if r-l+1 > max {
+				max = r - l + 1
 			}
-
-			left = index + 1
+		} else {
+			l = index + 1
 		}
 
-		strIndexMapping[s[right]] = right
-		right++
+		m[s[r]] = r
+		r++
 	}
 
-	if right-left > max {
-		return int(right - left)
-	}
-
-	return int(max)
-}
-
-func maxThree(i, j, k int16) int16 {
-	if i >= j && i >= k {
-		return i
-	}
-
-	if j >= i && j >= k {
-		return j
-	}
-
-	return k
+	return max
 }
