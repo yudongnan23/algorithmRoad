@@ -1,5 +1,6 @@
 package leetcode_hot_100
 
+// TODO again
 func detectCycle(head *ListNode) *ListNode {
 	fast := head
 	slow := head
