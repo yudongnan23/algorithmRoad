@@ -2,41 +2,51 @@ package leetcode_hot_100
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var newHead *ListNode
-	var p *ListNode
-	var more bool
-	for l1 != nil || l2 != nil {
-		var res int
-		if l1 != nil {
-			res = l1.Val
-			l1 = l1.Next
+	p := newHead
+
+	flag := false
+
+	createNewNode := func(a, b *ListNode) *ListNode {
+		var val int
+		if a != nil {
+			val = a.Val
 		}
-		if l2 != nil {
-			res = res + l2.Val
-			l2 = l2.Next
+		if b != nil {
+			val = val + b.Val
 		}
-		if more {
-			res = res + 1
+		if flag {
+			val++
+			flag = false
+		}
+		if val >= 10 {
+			flag = true
+			val = val - 10
 		}
 
-		more = false
-		if res > 9 {
-			more = true
-		}
-
-		node := ListNode{
-			Val: res % 10,
-		}
-
-		if newHead == nil {
-			newHead = &node
-			p = &node
-		} else {
-			p.Next = &node
-			p = p.Next
+		return &ListNode{
+			Val: val,
 		}
 	}
 
-	if more {
+	for l1 != nil || l2 != nil {
+		newNode := createNewNode(l1, l2)
+		if newHead == nil {
+			newHead = newNode
+			p = newNode
+		} else {
+			p.Next = newNode
+			p = p.Next
+		}
+
+		if l1 != nil {
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			l2 = l2.Next
+		}
+	}
+
+	if flag {
 		p.Next = &ListNode{
 			Val: 1,
 		}
