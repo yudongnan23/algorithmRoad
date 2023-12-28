@@ -1,5 +1,6 @@
 package leetcode_hot_100
 
+// TODO again
 func canPartition(nums []int) bool {
 	sum := 0
 	for _, v := range nums {
