@@ -6,9 +6,9 @@ func longestCommonSubsequence(text1 string, text2 string) int {
 	text2 = "-" + text2
 	n := len(text1)
 	m := len(text2)
-	dp := make([][]int, n+1)
-	for i := 0; i < n+1; i++ {
-		dp[i] = make([]int, m+1)
+	dp := make([][]int, n)
+	for i := 0; i < n; i++ {
+		dp[i] = make([]int, m)
 	}
 
 	longest := 0
