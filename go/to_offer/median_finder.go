@@ -3,38 +3,68 @@ package to_offer
 // TODO 待使用堆排序优化
 
 type MedianFinder struct {
-	nums []int
+	nums       []int
+	backupNums []int
 }
 
-/** initialize your data structure here. */
-func ConstructorI() MedianFinder {
+func ConstructorXX() MedianFinder {
 	return MedianFinder{
-		nums: make([]int, 0),
+		nums:       make([]int, 0),
+		backupNums: make([]int, 0),
 	}
 }
 
 func (mf *MedianFinder) AddNum(num int) {
-	nums := make([]int, len(mf.nums)+1)
-	i := 0
-	j := 0
-	for i < len(mf.nums) {
-		if mf.nums[i] > num && j == i {
-			nums[j] = num
-			copy(nums[j+1:], mf.nums[i:])
-			i = len(mf.nums)
-			j = i + 1
+	size := len(mf.nums)
+	mf.backupNums = append(mf.backupNums, 0)
+	if size > 0 {
+		mf.backupNums = append(mf.backupNums, 0)
+	}
+
+	defer func() {
+		mf.nums, mf.backupNums = mf.backupNums, mf.nums
+	}()
+
+	if size == 0 || mf.nums[size-1] <= num {
+		copy(mf.backupNums[:size], mf.nums)
+		mf.backupNums[size] = num
+		return
+	}
+
+	if mf.nums[0] >= num {
+		copy(mf.backupNums[1:size+1], mf.nums)
+		mf.backupNums[0] = num
+		return
+	}
+
+	left := 0
+	right := len(mf.nums) - 1
+
+	for left <= right {
+		mid := (left + right) / 2
+		if mf.nums[mid] == num {
+			left = mid
 			break
 		}
-		nums[j] = mf.nums[i]
-		j++
-		i++
+
+		if mf.nums[mid] > num {
+			right = mid - 1
+			continue
+		}
+
+		if mf.nums[mid] < num {
+			left = mid + 1
+			continue
+		}
 	}
 
-	if j == i {
-		nums[j] = num
+	if mf.nums[left] > num {
+		left--
 	}
 
-	mf.nums = nums
+	copy(mf.backupNums[:left+1], mf.nums[:left+1])
+	mf.backupNums[left+1] = num
+	copy(mf.backupNums[left+2:], mf.nums[left+1:])
 }
 
 func (mf *MedianFinder) FindMedian() float64 {
