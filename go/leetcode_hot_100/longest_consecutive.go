@@ -2,27 +2,26 @@ package leetcode_hot_100
 
 // TODO again
 func longestConsecutive(nums []int) int {
-	d := make(map[int]bool, len(nums))
-
+	m := make(map[int]bool, len(nums))
 	for i := 0; i < len(nums); i++ {
-		d[nums[i]] = true
+		m[nums[i]] = true
 	}
 
-	maxCount := 0
+	maxLength := 0
+	for k := range m {
+		if m[k-1] {
+			continue
+		}
+		start := k
+		for m[start] {
+			start++
+		}
 
-	for k := range d {
-		if !d[k-1] {
-			curMaxCount := 1
-			for d[k+1] {
-				k++
-				curMaxCount++
-			}
+		curLength := start - k
 
-			if curMaxCount > maxCount {
-				maxCount = curMaxCount
-			}
+		if curLength > maxLength {
+			maxLength = curLength
 		}
 	}
-
-	return maxCount
+	return maxLength
 }
