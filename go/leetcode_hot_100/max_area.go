@@ -2,30 +2,23 @@ package leetcode_hot_100
 
 // TODO again
 func maxArea(height []int) int {
+	maxArea := 0
 	left := 0
 	right := len(height) - 1
-	max := 0
-
 	for left < right {
-		curArea := (right - left) * min(height[left], height[right])
-		if curArea > max {
-			max = curArea
-		}
-
-		if height[left] < height[right] {
-			left++
-		} else {
+		minHeight := height[left]
+		length := right - left
+		if minHeight > height[right] {
+			minHeight = height[right]
 			right--
+		} else {
+			left++
+		}
+
+		curArea := length * minHeight
+		if curArea > maxArea {
+			maxArea = curArea
 		}
 	}
-
-	return max
-}
-
-func min(i, j int) int {
-	if i < j {
-		return i
-	}
-
-	return j
+	return maxArea
 }
