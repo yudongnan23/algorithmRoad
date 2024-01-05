@@ -2,7 +2,7 @@ package leetcode_hot_100
 
 import "sort"
 
-// TODO again
+// TODO three
 func threeSum(nums []int) [][]int {
 	res := make([][]int, 0)
 
