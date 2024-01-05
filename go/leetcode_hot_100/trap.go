@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func trap(height []int) int {
 	length := len(height)
 
@@ -32,6 +32,13 @@ func trap(height []int) int {
 
 func max(i, j int) int {
 	if i > j {
+		return i
+	}
+	return j
+}
+
+func min(i, j int) int {
+	if i < j {
 		return i
 	}
 	return j
