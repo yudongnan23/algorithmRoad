@@ -1,23 +1,12 @@
 package leetcode_hot_100
 
-// TODO again 二分查找优化
+// TODO three
 func maxSlidingWindow(nums []int, k int) []int {
-	res := make([]int, len(nums)-k+1)
-	queue := make([]int, 0)
-	index := 0
-	for i := 0; i < len(nums); i++ {
-		queue = insert(nums, i, queue, k)
-		if i >= k-1 {
-			res[index] = nums[queue[0]]
-			index++
-		}
-	}
+	size := len(nums)
+	res := make([]int, 0, size-k+1)
+	queue := make([]int, 0, k)
 
-	return res
-}
-
-func insert(nums []int, index int, queue []int, k int) []int {
-	deleteFunc := func() {
+	deleteFunc := func(index int) {
 		for i := 0; i < len(queue); i++ {
 			if index-queue[i] <= k-1 {
 				queue = queue[i:]
@@ -26,26 +15,48 @@ func insert(nums []int, index int, queue []int, k int) []int {
 		}
 	}
 
-	if len(queue) > 0 && nums[index] > nums[queue[0]] {
-		queue = []int{index}
-		return queue
-	}
+	enqueue := func(index int) {
+		curNum := nums[index]
+		queueSize := len(queue)
+		if queueSize > 0 && nums[queue[0]] < curNum {
+			queue = []int{index}
+			return
+		}
 
-	if len(queue) > 0 && nums[index] < nums[queue[len(queue)-1]] {
+		left := 0
+		right := queueSize - 1
+		for left < right {
+			mid := (left + right) / 2
+			if nums[queue[mid]] == curNum {
+				right = mid
+				break
+			}
+
+			if nums[queue[mid]] > curNum {
+				left = mid + 1
+
+			}
+			if nums[queue[mid]] < curNum {
+				right = mid - 1
+			}
+		}
+
+		if queueSize > 0 {
+			if nums[queue[right]] > curNum {
+				right++
+			}
+			queue = queue[:right]
+		}
+
 		queue = append(queue, index)
-		deleteFunc()
-		return queue
+		deleteFunc(index)
 	}
 
-	for i := len(queue) - 1; i >= 0; i-- {
-		if nums[queue[i]] >= nums[index] {
-			queue = queue[:i+1]
-			break
+	for i := 0; i < size; i++ {
+		enqueue(i)
+		if i-k+1 >= 0 {
+			res = append(res, nums[queue[0]])
 		}
 	}
-
-	queue = append(queue, index)
-	deleteFunc()
-
-	return queue
+	return res
 }
