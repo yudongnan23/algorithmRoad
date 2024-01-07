@@ -1,33 +1,18 @@
 package leetcode_hot_100
 
+// TODO three
 func productExceptSelf(nums []int) []int {
-	length := len(nums)
-	res := make([]int, length)
-	zeroCount := 0
-	n := 1
-	for i := 0; i < length; i++ {
-		if nums[i] == 0 {
-			zeroCount++
-			continue
-		}
-		n = n * nums[i]
+	size := len(nums)
+	res := make([]int, size)
+	res[0] = 1
+	for i := 1; i < size; i++ {
+		res[i] = res[i-1] * nums[i-1]
 	}
 
-	for i := 0; i < length; i++ {
-		if zeroCount > 1 {
-			res[i] = 0
-			continue
-		}
-		if nums[i] == 0 {
-			res[i] = n
-			continue
-		}
-		if zeroCount > 0 {
-			res[i] = 0
-			continue
-		}
-
-		res[i] = n / nums[i]
+	r := 1
+	for i := size - 1; i >= 0; i-- {
+		res[i] = res[i] * r
+		r = r * nums[i]
 	}
 
 	return res
