@@ -1,51 +1,47 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func minWindow(s string, t string) string {
-	ht := make(map[byte]int, 0)
-	for i := 0; i < len(t); i++ {
-		ht[t[i]]++
+	sizeT := len(t)
+	sizeS := len(s)
+	res := ""
+	tMap := make(map[byte]int, 0)
+	for i := 0; i < sizeT; i++ {
+		tMap[t[i]]++
 	}
 
-	l := 0
-	r := 0
-	valid := 0
-	length := len(s)
-	minLen := len(s) + 1
-	start := 0
-
-	window := make(map[byte]int, 0)
-
-	for r < length {
-		char := s[r]
-		r++
-
-		if ht[char] > 0 {
-			window[char]++
-			if window[char] == ht[char] {
-				valid++
+	sMap := make(map[byte]int, 0)
+	left := 0
+	right := 0
+	for right <= sizeS {
+		curSize := right - left
+		for curSize >= sizeT {
+			if !exists(sMap, tMap) {
+				break
 			}
+			if curSize < len(res) || len(res) == 0 {
+				res = s[left:right]
+			}
+			sMap[s[left]]--
+			left++
+			curSize = right - left
 		}
 
-		for valid == len(ht) {
-			if r-l < minLen {
-				start = l
-				minLen = r - l
-			}
+		if right < sizeS {
+			sMap[s[right]]++
+		}
 
-			removeChar := s[l]
-			l++
-			if ht[removeChar] > 0 {
-				if window[removeChar] == ht[removeChar] {
-					valid--
-				}
-				window[removeChar]--
-			}
+		right++
+	}
+
+	return res
+}
+
+func exists(m1, m2 map[byte]int) bool {
+	for k, v := range m2 {
+		if m1[k] < v {
+			return false
 		}
 	}
-
-	if minLen == len(s)+1 {
-		return ""
-	}
-	return s[start : start+minLen]
+	return true
 }
