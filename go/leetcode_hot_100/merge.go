@@ -2,14 +2,8 @@ package leetcode_hot_100
 
 import "sort"
 
-// TODO again
+// TODO three
 func merge(intervals [][]int) [][]int {
-	res := make([][]int, len(intervals))
-	if len(intervals) == 0 {
-		return res
-	}
-
-	// 先排个序
 	sort.Slice(intervals, func(i, j int) bool {
 		if intervals[i][0] < intervals[j][0] {
 			return true
@@ -17,19 +11,21 @@ func merge(intervals [][]int) [][]int {
 		return false
 	})
 
-	index := 0
-	res[index] = intervals[0]
-	index++
+	size := len(intervals)
+	res := make([][]int, 0)
+	res = append(res, intervals[0])
 
-	for i := 1; i < len(intervals); i++ {
-		lastInterval := res[index-1]
-		if lastInterval[1] < intervals[i][0] {
-			res[index] = intervals[i]
-			index++
+	for i := 1; i < size; i++ {
+		curMax := res[len(res)-1][1]
+		if intervals[i][0] > curMax {
+			res = append(res, intervals[i])
 			continue
 		}
-		res[index-1] = []int{min(lastInterval[0], intervals[i][0]), max(lastInterval[1], intervals[i][1])}
+
+		if intervals[i][1] > curMax {
+			res[len(res)-1][1] = intervals[i][1]
+		}
 	}
 
-	return res[:index]
+	return res
 }
