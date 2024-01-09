@@ -1,49 +1,30 @@
 package leetcode_hot_100
 
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil {
-		return l2
-	}
-	if l2 == nil {
-		return l1
-	}
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+	var (
+		head = &ListNode{}
+		p    = head
+	)
 
-	var head *ListNode
-	p := head
-	for l1 != nil && l2 != nil {
-		var node *ListNode
-		if less(l1, l2) {
-			node = l1
-			l1 = l1.Next
+	for list1 != nil && list2 != nil {
+		node := list1
+		if node.Val > list2.Val {
+			node = list2
+			list2 = list2.Next
 		} else {
-			node = l2
-			l2 = l2.Next
-		}
-
-		if head == nil {
-			p = node
-			head = node
-			continue
+			list1 = list1.Next
 		}
 
 		p.Next = node
 		p = p.Next
 	}
 
-	if l1 != nil {
-		p.Next = l1
+	if list1 == nil {
+		p.Next = list2
+	}
+	if list2 == nil {
+		p.Next = list1
 	}
 
-	if l2 != nil {
-		p.Next = l2
-	}
-
-	return head
-}
-
-func less(node1, node2 *ListNode) bool {
-	if node1.Val < node2.Val {
-		return true
-	}
-	return false
+	return head.Next
 }
