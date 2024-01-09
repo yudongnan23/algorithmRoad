@@ -1,24 +1,36 @@
 package leetcode_hot_100
 
+// TODO three
 func isPalindrome(head *ListNode) bool {
-	vals := make([]int, 0)
-	p := head
-
-	for p != nil {
-		vals = append(vals, p.Val)
-		p = p.Next
+	if head == nil {
+		return true
+	}
+	count := 0
+	for p := head; p != nil; p = p.Next {
+		count++
 	}
 
-	l := 0
-	r := len(vals) - 1
+	left := head
+	right := head.Next
+	left.Next = nil
 
-	for l < r {
-		if vals[l] != vals[r] {
+	for i := 1; i < count/2; i++ {
+		temp := right.Next
+		right.Next = left
+		left = right
+		right = temp
+	}
+
+	if count%2 == 1 && right != nil {
+		right = right.Next
+	}
+
+	for left != nil && right != nil {
+		if left.Val != right.Val {
 			return false
 		}
-
-		l++
-		r--
+		left = left.Next
+		right = right.Next
 	}
 
 	return true
