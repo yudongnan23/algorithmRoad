@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func sortList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
