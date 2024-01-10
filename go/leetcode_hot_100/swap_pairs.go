@@ -2,31 +2,13 @@ package leetcode_hot_100
 
 // TODO again
 func swapPairs(head *ListNode) *ListNode {
-	if head == nil {
-		return nil
+	if head == nil || head.Next == nil {
+		return head
 	}
 
-	r := head.Next
-	l := head
-
-	newHead := &ListNode{}
-	newHead.Next = head
-	p := newHead
-
-	for r != nil {
-		next := r.Next
-
-		r.Next = l
-		l.Next = next
-		p.Next = r
-
-		if next == nil {
-			break
-		}
-		l = next
-		r = next.Next
-		p = p.Next.Next
-	}
-
-	return newHead.Next
+	temp := head.Next.Next
+	right := head.Next
+	right.Next = head
+	head.Next = swapPairs(temp)
+	return right
 }
