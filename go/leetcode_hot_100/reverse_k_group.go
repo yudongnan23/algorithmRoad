@@ -1,54 +1,37 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func reverseKGroup(head *ListNode, k int) *ListNode {
-	if head == nil {
-		return nil
+	if k <= 1 {
+		return head
+	}
+	canReverse, endNode := canReverse(head, k)
+	if !canReverse || head == nil {
+		return head
 	}
 
-	newHead := &ListNode{}
-	newHead.Next = head
-
-	reverseFunc := func(l *ListNode) (*ListNode, *ListNode, *ListNode) {
-		curP := l
-		n := 0
-		var (
-			curHead *ListNode
-			tail    *ListNode
-		)
-
-		for curP != nil && n < k {
-			node := &ListNode{
-				Val: curP.Val,
-			}
-
-			node.Next = curHead
-			curHead = node
-			if tail == nil {
-				tail = node
-			}
-
-			curP = curP.Next
-			n++
-		}
-		if n != k {
-			return l, nil, nil
-		}
-		return curHead, tail, curP
+	right := head.Next
+	left := head
+	next := endNode.Next
+	for right != endNode {
+		temp := right.Next
+		right.Next = left
+		left = right
+		right = temp
 	}
 
+	right.Next = left
+	head.Next = reverseKGroup(next, k)
+
+	return right
+}
+
+func canReverse(head *ListNode, k int) (bool, *ListNode) {
 	p := head
-	q := newHead
-
-	for p != nil {
-		curHead, tail, next := reverseFunc(p)
-		q.Next = curHead
-		if next == nil {
-			break
-		}
-		q = tail
-		p = next
+	count := 1
+	for p != nil && count < k {
+		count++
+		p = p.Next
 	}
-
-	return newHead.Next
+	return count == k && p != nil, p
 }
