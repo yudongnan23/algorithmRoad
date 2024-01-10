@@ -1,7 +1,7 @@
 package leetcode_hot_100
 
 // Node
-// TODO again
+// TODO three
 type Node struct {
 	Val    int
 	Next   *Node
@@ -9,45 +9,27 @@ type Node struct {
 }
 
 func copyRandomList(head *Node) *Node {
-	if head == nil {
-		return nil
-	}
-
 	var (
-		newHead *Node
-		newP    *Node
+		newHead          = &Node{}
+		newP             = newHead
+		new2OldRandomMap = make(map[*Node]*Node, 0)
+		old2NewMap       = make(map[*Node]*Node, 0)
 	)
-	p := head
-	new2OldRandomMap := make(map[*Node]*Node, 0)
-	old2NewMap := make(map[*Node]*Node, 0)
-	for p != nil {
-		node := &Node{
-			Val: p.Val,
-		}
-		old2NewMap[p] = node
-		if p.Random != nil {
-			new2OldRandomMap[node] = p.Random
-		}
-		p = p.Next
-		if newHead == nil {
-			newHead = node
-			newP = node
-			continue
-		}
 
+	for p := head; p != nil; p = p.Next {
+		node := &Node{Val: p.Val}
 		newP.Next = node
 		newP = newP.Next
+		new2OldRandomMap[node] = p.Random
+		old2NewMap[p] = node
 	}
 
-	newP = newHead
-	for newP != nil {
-		oldRandom, ok := new2OldRandomMap[newP]
-		if ok {
-			newP.Random = old2NewMap[oldRandom]
+	for p := newHead.Next; p != nil; p = p.Next {
+		if new2OldRandomMap[p] == nil {
+			continue
 		}
-
-		newP = newP.Next
+		p.Random = old2NewMap[new2OldRandomMap[p]]
 	}
 
-	return newHead
+	return newHead.Next
 }
