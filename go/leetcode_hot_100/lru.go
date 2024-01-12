@@ -1,7 +1,7 @@
 package leetcode_hot_100
 
 // LRUCache
-// TODO again
+// TODO three
 type LRUCache struct {
 	head     *NodeX
 	tail     *NodeX
