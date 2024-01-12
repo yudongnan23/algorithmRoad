@@ -1,24 +1,20 @@
 package leetcode_hot_100
 
 func kthSmallest(root *TreeNode, k int) int {
-	count := 0
-	val := 0
-	infixOrder(root, &count, &val, k)
+	val := -1
+	infixOrder(root, &k, &val)
 	return val
 }
 
-func infixOrder(node *TreeNode, count, val *int, k int) {
-	if *count == k {
+func infixOrder(root *TreeNode, k, val *int) {
+	if root == nil {
 		return
 	}
-	if node == nil {
+	infixOrder(root.Left, k, val)
+	*k--
+	if *k == 0 && *val == -1 {
+		*val = root.Val
 		return
 	}
-	infixOrder(node.Left, count, val, k)
-	*count++
-	if *count == k {
-		*val = node.Val
-		return
-	}
-	infixOrder(node.Right, count, val, k)
+	infixOrder(root.Right, k, val)
 }
