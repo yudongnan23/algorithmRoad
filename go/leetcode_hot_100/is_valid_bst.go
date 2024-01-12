@@ -1,46 +1,38 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
+const (
+	minVal = -(1 << 32)
+)
+
 func isValidBST(root *TreeNode) bool {
-	isBst, _, _, _ := bst(root)
-	return isBst
+	_, _, isBST := BST(root)
+	return isBST
 }
 
-func bst(root *TreeNode) (bool, bool, int, int) {
+func BST(root *TreeNode) (int, int, bool) {
 	if root == nil {
-		return true, true, 0, 0
+		return minVal, minVal, true
 	}
 
-	if root.Left != nil && root.Left.Val >= root.Val {
-		return false, false, 0, 0
+	leftMinValue, leftMaxValue, leftBST := BST(root.Left)
+	rightMinValue, rightMaxValue, rightBST := BST(root.Right)
+
+	if !leftBST || !rightBST {
+		return 0, 0, false
 	}
 
-	if root.Right != nil && root.Right.Val <= root.Val {
-		return false, false, 0, 0
+	if (leftMaxValue != minVal && root.Val <= leftMaxValue) ||
+		(rightMinValue != minVal && root.Val >= rightMinValue) {
+		return 0, 0, false
 	}
 
-	leftBst, leftEnd, leftMaxVal, leftMinVal := bst(root.Left)
-	rightBst, rightEnd, rightMaxVal, rightMinVal := bst(root.Right)
-
-	if !leftBst || !rightBst {
-		return false, false, 0, 0
+	if leftMinValue == minVal {
+		leftMinValue = root.Val
+	}
+	if rightMaxValue == minVal {
+		rightMaxValue = root.Val
 	}
 
-	if !leftEnd && leftMaxVal >= root.Val {
-		return false, false, 0, 0
-	}
-
-	if !rightEnd && rightMinVal <= root.Val {
-		return false, false, 0, 0
-	}
-
-	if leftEnd {
-		leftMinVal = root.Val
-	}
-
-	if rightEnd {
-		rightMaxVal = root.Val
-	}
-
-	return true, false, rightMaxVal, leftMinVal
+	return leftMinValue, rightMaxValue, true
 }
