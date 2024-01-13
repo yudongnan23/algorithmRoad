@@ -1,44 +1,26 @@
 package leetcode_hot_100
 
 func rightSideView(root *TreeNode) []int {
+	res := make([]int, 0)
 	if root == nil {
-		return nil
+		return res
 	}
-	levelRange := make([][]int, 0)
-	queue := make([]NodeWithDepth, 1)
-	queue[0] = NodeWithDepth{
-		Node:  root,
-		Depth: 1,
-	}
-
+	queue := []NodeWithDepth{{Node: root, Depth: 0}}
 	for len(queue) != 0 {
 		curNode := queue[0]
 		queue = queue[1:]
-
-		if len(levelRange) < curNode.Depth {
-			levelRange = append(levelRange, []int{})
+		if curNode.Depth == len(res) {
+			res = append(res, 0)
 		}
-
-		levelRange[curNode.Depth-1] = append(levelRange[curNode.Depth-1], curNode.Node.Val)
+		res[curNode.Depth] = curNode.Node.Val
 
 		if curNode.Node.Left != nil {
-			queue = append(queue, NodeWithDepth{
-				Node:  curNode.Node.Left,
-				Depth: curNode.Depth + 1,
-			})
+			queue = append(queue, NodeWithDepth{Node: curNode.Node.Left, Depth: curNode.Depth + 1})
 		}
 
 		if curNode.Node.Right != nil {
-			queue = append(queue, NodeWithDepth{
-				Node:  curNode.Node.Right,
-				Depth: curNode.Depth + 1,
-			})
+			queue = append(queue, NodeWithDepth{Node: curNode.Node.Right, Depth: curNode.Depth + 1})
 		}
-	}
-
-	res := make([]int, len(levelRange))
-	for i := 0; i < len(levelRange); i++ {
-		res[i] = levelRange[i][len(levelRange[i])-1]
 	}
 
 	return res
