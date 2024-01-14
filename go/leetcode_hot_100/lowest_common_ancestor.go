@@ -1,47 +1,33 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	node, _ := dfsIII(root, p, q)
-	return node
+	targetNode, _ := dfsI(root, p, q)
+	return targetNode
 }
 
-func dfsIII(root, p, q *TreeNode) (*TreeNode, bool) {
+func dfsI(root, p, q *TreeNode) (*TreeNode, bool) {
 	if root == nil {
 		return nil, false
 	}
-
-	equal := root == p || root == q
-
-	leftNode, leftFound := dfsIII(root.Left, p, q)
-	if leftNode != nil {
-		return leftNode, true
+	rootExist := (root == p) || (root == q)
+	targetNode, leftExist := dfsI(root.Left, p, q)
+	if targetNode != nil {
+		return targetNode, true
 	}
-
-	if equal && leftFound {
+	if leftExist && rootExist {
+		return root, true
+	}
+	targetNode, rightExist := dfsI(root.Right, p, q)
+	if targetNode != nil {
+		return targetNode, true
+	}
+	if rootExist && rightExist {
+		return root, true
+	}
+	if leftExist && rightExist {
 		return root, true
 	}
 
-	rightNode, rightFound := dfsIII(root.Right, p, q)
-	if rightNode != nil {
-		return rightNode, true
-	}
-
-	if equal && rightFound {
-		return root, true
-	}
-
-	if rightFound && leftFound {
-		return root, true
-	}
-
-	if equal {
-		return nil, true
-	}
-
-	if rightFound || leftFound {
-		return nil, true
-	}
-
-	return nil, false
+	return nil, rootExist || leftExist || rightExist
 }
