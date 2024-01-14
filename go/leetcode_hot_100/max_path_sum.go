@@ -4,7 +4,7 @@ const (
 	minNum = -(2 << 32)
 )
 
-// TODO again
+// TODO three
 func maxPathSum(root *TreeNode) int {
 	maxLength := -(2 << 32)
 	maxLen := dfsIIII(root, &maxLength)
