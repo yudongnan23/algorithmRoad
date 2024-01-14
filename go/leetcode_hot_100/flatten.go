@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func flatten(root *TreeNode) {
 	dfs(root)
 }
