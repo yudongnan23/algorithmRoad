@@ -1,31 +1,19 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func pathSum(root *TreeNode, targetSum int) int {
-	var count int
-	trapII(root, targetSum, &count)
-	return count
+	prefixMap := map[int]int{0: 1}
+	return dfsII(root, targetSum, 0, prefixMap)
 }
 
-func trapII(root *TreeNode, target int, count *int) {
+func dfsII(root *TreeNode, targetSum, curSum int, prefixMap map[int]int) int {
 	if root == nil {
-		return
+		return 0
 	}
-
-	dfsII(root, target, 0, count)
-	trapII(root.Left, target, count)
-	trapII(root.Right, target, count)
-}
-
-func dfsII(root *TreeNode, target int, curSum int, count *int) {
-	if root == nil {
-		return
-	}
-
-	if curSum+root.Val == target {
-		*count++
-	}
-
-	dfsII(root.Left, target, curSum+root.Val, count)
-	dfsII(root.Right, target, curSum+root.Val, count)
+	curSum = curSum + root.Val
+	res := prefixMap[curSum-targetSum]
+	prefixMap[curSum]++
+	res += dfsII(root.Left, targetSum, curSum, prefixMap) + dfsII(root.Right, targetSum, curSum, prefixMap)
+	prefixMap[curSum]--
+	return res
 }
