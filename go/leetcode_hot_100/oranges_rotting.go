@@ -1,74 +1,72 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func orangesRotting(grid [][]int) int {
-	if len(grid) == 0 || len(grid[0]) == 0 {
-		return -1
-	}
+	n := len(grid)
+	m := len(grid[0])
 
 	badQueue := make([]int, 0)
-	goodQueue := make([]int, 0)
-	for i := 0; i < len(grid); i++ {
-		for j := 0; j < len(grid[i]); j++ {
-			if grid[i][j] == 1 {
-				goodQueue = append(goodQueue, makeKeyIII(i, j))
-			}
-
+	goodCount := 0
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
 			if grid[i][j] == 2 {
 				badQueue = append(badQueue, makeKeyIII(i, j))
 			}
+			if grid[i][j] == 1 {
+				goodCount++
+			}
 		}
 	}
 
-	if len(goodQueue) == 0 {
+	corrupt := func(i, j int) {
+		// 上
+		if i > 0 && grid[i-1][j] == 1 {
+			goodCount--
+			grid[i-1][j] = 2
+			badQueue = append(badQueue, makeKeyIII(i-1, j))
+		}
+
+		// 下
+		if i < n-1 && grid[i+1][j] == 1 {
+			goodCount--
+			grid[i+1][j] = 2
+			badQueue = append(badQueue, makeKeyIII(i+1, j))
+		}
+
+		// 左
+		if j > 0 && grid[i][j-1] == 1 {
+			goodCount--
+			grid[i][j-1] = 2
+			badQueue = append(badQueue, makeKeyIII(i, j-1))
+		}
+
+		// 右
+		if j < m-1 && grid[i][j+1] == 1 {
+			goodCount--
+			grid[i][j+1] = 2
+			badQueue = append(badQueue, makeKeyIII(i, j+1))
+		}
+	}
+
+	if goodCount == 0 {
 		return 0
 	}
 
-	minutes := 0
-	goBadCount := 0
-	for goBadCount != len(goodQueue) && len(badQueue) > 0 {
-		newBadQueue := make([]int, 0)
-		minutes++
-		for i := 0; i < len(badQueue); i++ {
-			m, n := parseKeyII(badQueue[i])
-
-			// 上
-			if m > 0 && grid[m-1][n] == 1 {
-				goBadCount++
-				grid[m-1][n] = 2
-				newBadQueue = append(newBadQueue, makeKeyIII(m-1, n))
-			}
-
-			// 下
-			if m < len(grid)-1 && grid[m+1][n] == 1 {
-				goBadCount++
-				grid[m+1][n] = 2
-				newBadQueue = append(newBadQueue, makeKeyIII(m+1, n))
-			}
-
-			// 左
-			if n > 0 && grid[m][n-1] == 1 {
-				goBadCount++
-				grid[m][n-1] = 2
-				newBadQueue = append(newBadQueue, makeKeyIII(m, n-1))
-			}
-
-			// 右
-			if n < len(grid[m])-1 && grid[m][n+1] == 1 {
-				goBadCount++
-				grid[m][n+1] = 2
-				newBadQueue = append(newBadQueue, makeKeyIII(m, n+1))
-			}
+	minute := -1
+	for len(badQueue) != 0 {
+		minute++
+		curBadQueue := make([]int, len(badQueue))
+		copy(curBadQueue, badQueue)
+		badQueue = badQueue[0:0]
+		for _, bad := range curBadQueue {
+			i, j := parseKeyII(bad)
+			corrupt(i, j)
 		}
-
-		badQueue = newBadQueue
 	}
-
-	if goBadCount != len(goodQueue) {
-		return -1
+	if goodCount > 0 {
+		minute = -1
 	}
-
-	return minutes
+	return minute
 }
 
 func makeKeyIII(i, j int) int {
