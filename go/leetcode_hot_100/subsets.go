@@ -2,7 +2,7 @@ package leetcode_hot_100
 
 import "math"
 
-// TODO again
+// TODO three
 func subsets(nums []int) [][]int {
 	ans := make([][]int, 1, int(math.Pow(2, float64(len(nums))))+1)
 	ans[0] = []int{}
