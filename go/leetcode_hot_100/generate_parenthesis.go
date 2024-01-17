@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func generateParenthesis(n int) []string {
 	res := make([]string, 0, 1000)
 	var backtracking func(int, int, string)
