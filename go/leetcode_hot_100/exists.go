@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func exist(board [][]byte, word string) bool {
 	if len(board) == 0 || len(board) == 0 {
 		return false
