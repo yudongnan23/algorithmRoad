@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func partition(s string) [][]string {
 	res := make([][]string, 0, 1000)
 	var search func(int, []string)
