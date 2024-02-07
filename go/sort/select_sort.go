@@ -2,17 +2,32 @@ package sort
 
 func selectSort(nums []int) {
 	left := 0
-	for left < len(nums) {
+	right := len(nums) - 1
+	for left < right {
 		minIndex := left
-		for i := left + 1; i < len(nums); i++ {
-			if nums[i] < nums[minIndex] {
+		maxIndex := right
+		for i := left; i <= right; i++ {
+			if nums[i] < nums[minIndex] && i < right {
 				minIndex = i
 			}
+
+			if nums[i] > nums[maxIndex] {
+				maxIndex = i
+			}
 		}
-		if minIndex != left {
-			nums[left], nums[minIndex] = nums[minIndex], nums[left]
+
+		leftVal := nums[left]
+		rightVal := nums[right]
+		nums[left] = nums[minIndex]
+		nums[right] = nums[maxIndex]
+		if minIndex != right {
+			nums[minIndex] = leftVal
+		}
+		if maxIndex != left {
+			nums[maxIndex] = rightVal
 		}
 
 		left++
+		right--
 	}
 }
