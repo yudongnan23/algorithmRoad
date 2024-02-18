@@ -22,3 +22,9 @@ func Test_insertSort(t *testing.T) {
 	insertSort(nums)
 	fmt.Println(nums)
 }
+
+func Test_shellSort(t *testing.T) {
+	nums := []int{1, 2, 3, 4, 8, 6, 5, 7, 10, 9}
+	shellSort(nums)
+	fmt.Println(nums)
+}
