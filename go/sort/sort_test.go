@@ -46,3 +46,9 @@ func Test_countSort(t *testing.T) {
 	countSort(nums)
 	fmt.Println(nums)
 }
+
+func Test_heapSort(t *testing.T) {
+	nums := []int{9, 10, 1, 2, 4, 3, 7, 8, 6, 5}
+	heapSort(nums)
+	fmt.Println(nums)
+}
