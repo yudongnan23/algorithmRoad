@@ -1,28 +1,19 @@
 package leetcode_hot_100
 
-type NodeWithIndex struct {
-	Index int
-	Val   int
-}
-
 // TODO three
 func dailyTemperatures(temperatures []int) []int {
-	n := len(temperatures)
-	res := make([]int, n)
-	if n == 0 {
+	length := len(temperatures)
+	res := make([]int, length)
+	if length == 0 {
 		return res
 	}
-	stack := make([]NodeWithIndex, 0)
-	res[n-1] = 0
-	stack = append(stack, NodeWithIndex{
-		Index: n - 1,
-		Val:   temperatures[n-1],
-	})
-
-	for i := n - 2; i >= 0; i-- {
+	stack := make([][2]int, 0)
+	res[length-1] = 0
+	stack = append(stack, [2]int{temperatures[length-1], length - 1})
+	for i := length - 2; i >= 0; i-- {
 		for j := len(stack) - 1; j >= 0; j-- {
-			if stack[j].Val > temperatures[i] {
-				res[i] = stack[j].Index - i
+			if stack[j][0] > temperatures[i] {
+				res[i] = stack[j][1] - i
 				stack = stack[:j+1]
 				break
 			}
@@ -31,11 +22,7 @@ func dailyTemperatures(temperatures []int) []int {
 		if res[i] == 0 {
 			stack = stack[:0]
 		}
-
-		stack = append(stack, NodeWithIndex{
-			Index: i,
-			Val:   temperatures[i],
-		})
+		stack = append(stack, [2]int{temperatures[i], i})
 	}
 
 	return res
