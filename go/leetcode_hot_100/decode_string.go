@@ -2,36 +2,14 @@ package leetcode_hot_100
 
 import "strconv"
 
-var wordMap = map[byte]bool{
-	'a': true,
-	'b': true,
-	'c': true,
-	'd': true,
-	'e': true,
-	'f': true,
-	'g': true,
-	'h': true,
-	'i': true,
-	'j': true,
-	'k': true,
-	'l': true,
-	'm': true,
-	'n': true,
-	'o': true,
-	'p': true,
-	'q': true,
-	'r': true,
-	's': true,
-	't': true,
-	'u': true,
-	'v': true,
-	'w': true,
-	'x': true,
-	'y': true,
-	'z': true,
+// TODO three
+func isWord(b byte) bool {
+	if b >= 'a' && b <= 'z' {
+		return true
+	}
+	return false
 }
 
-// TODO again
 func decodeString(s string) string {
 	if len(s) == 0 {
 		return ""
@@ -40,7 +18,7 @@ func decodeString(s string) string {
 	res := ""
 	i := 0
 	for i < len(s) {
-		if !wordMap[s[i]] {
+		if !isWord(s[i]) {
 			num, startIndex, endIndex := getNum(&s, i)
 			res = res + multiStr(decodeString(s[startIndex:endIndex]), num)
 			i = endIndex + 1
