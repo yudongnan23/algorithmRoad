@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	if len(nums1) == 0 && len(nums2) == 0 {
 		return 0
