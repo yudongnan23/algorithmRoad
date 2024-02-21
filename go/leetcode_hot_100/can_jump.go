@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func canJump(nums []int) bool {
 	i, right, n := 0, nums[0], len(nums)-1
 	for i <= right && i <= n {
