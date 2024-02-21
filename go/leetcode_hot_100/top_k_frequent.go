@@ -1,68 +1,55 @@
 package leetcode_hot_100
 
-type ValWithCount struct {
-	Val   int
-	Count int
-}
-
+// TODO three
 func topKFrequent(nums []int, k int) []int {
-	d := make(map[int]int, 0)
-
+	countMap := make(map[int]int, 0)
 	for i := 0; i < len(nums); i++ {
-		d[nums[i]]++
+		countMap[nums[i]]++
+	}
+	length := len(countMap)
+	newNums := make([][2]int, 0, length)
+	for num, count := range countMap {
+		newNums = append(newNums, [2]int{num, count})
+	}
+	for i := length / 2; i >= 0; i-- {
+		heapII(newNums, i, length)
 	}
 
-	newNums := make([]ValWithCount, 0, len(d))
-	for k, v := range d {
-		newNums = append(newNums, ValWithCount{
-			Val:   k,
-			Count: v,
-		})
+	sortCount := 0
+	for i := len(newNums) - 1; i > 0 && sortCount < k; i-- {
+		swapII(newNums, 0, i)
+		length--
+		heapII(newNums, 0, length)
+		sortCount++
 	}
-
-	newNums = mergeSortII(newNums)
 
 	res := make([]int, 0, k)
 	for i := len(newNums) - 1; len(res) < k; i-- {
-		res = append(res, newNums[i].Val)
+		res = append(res, newNums[i][0])
 	}
 	return res
 }
 
-func mergeSortII(nums []ValWithCount) []ValWithCount {
-	if len(nums) <= 1 {
-		return nums
+func heapII(nums [][2]int, index, length int) {
+	left := 2*index + 1
+	right := 2*index + 2
+
+	largest := index
+
+	if left < length && nums[left][1] > nums[largest][1] {
+		largest = left
 	}
-	mid := len(nums) / 2
-	nums1 := mergeSortII(nums[:mid])
-	nums2 := mergeSortII(nums[mid:])
-	return sortTwoSliceII(nums1, nums2)
+
+	if right < length && nums[right][1] > nums[largest][1] {
+		largest = right
+	}
+
+	if largest != index {
+		swapII(nums, largest, index)
+		heapII(nums, largest, length)
+	}
 }
 
-func sortTwoSliceII(nums1, nums2 []ValWithCount) []ValWithCount {
-	nums := make([]ValWithCount, 0, len(nums1)+len(nums2))
-	index1 := 0
-	index2 := 0
-
-	for index1 < len(nums1) || index2 < len(nums2) {
-		if index1 >= len(nums1) {
-			nums = append(nums, nums2[index2:]...)
-			break
-		}
-
-		if index2 >= len(nums2) {
-			nums = append(nums, nums1[index1:]...)
-			break
-		}
-
-		if nums1[index1].Count < nums2[index2].Count {
-			nums = append(nums, nums1[index1])
-			index1++
-		} else {
-			nums = append(nums, nums2[index2])
-			index2++
-		}
-	}
-
-	return nums
+func swapII(nums [][2]int, i, j int) {
+	nums[i], nums[j] = nums[j], nums[i]
 }
