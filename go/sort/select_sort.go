@@ -7,7 +7,7 @@ func selectSort(nums []int) {
 		minIndex := left
 		maxIndex := right
 		for i := left; i <= right; i++ {
-			if nums[i] < nums[minIndex] && i < right {
+			if nums[i] < nums[minIndex] {
 				minIndex = i
 			}
 
@@ -18,8 +18,10 @@ func selectSort(nums []int) {
 
 		leftVal := nums[left]
 		rightVal := nums[right]
-		nums[left] = nums[minIndex]
-		nums[right] = nums[maxIndex]
+		minVal := nums[minIndex]
+		maxVal := nums[maxIndex]
+		nums[left] = minVal
+		nums[right] = maxVal
 		if minIndex != right {
 			nums[minIndex] = leftVal
 		}
