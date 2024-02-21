@@ -2,7 +2,7 @@ package sort
 
 func heapSort(nums []int) {
 	length := len(nums)
-	for i := 0; i < length; i++ {
+	for i := length - 1; i >= 0; i-- {
 		heap(nums, length, i)
 	}
 

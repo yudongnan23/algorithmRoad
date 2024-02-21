@@ -51,7 +51,7 @@ func Test_countSort(t *testing.T) {
 }
 
 func Test_heapSort(t *testing.T) {
-	nums := []int{9, 10, 1, 2, 5, 6, 8, 4, 7, 3}
+	nums := []int{3, 2, 1, 5, 6, 4}
 	heapSort(nums)
 	fmt.Println(nums)
 }

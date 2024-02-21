@@ -2,44 +2,41 @@ package leetcode_hot_100
 
 // TODO again
 func findKthLargest(nums []int, k int) int {
-	newNums := mergeSort(nums)
-	return newNums[len(newNums)-k]
-}
-
-func mergeSort(nums []int) []int {
-	if len(nums) <= 1 {
-		return nums
-	}
-	mid := len(nums) / 2
-	nums1 := mergeSort(nums[:mid])
-	nums2 := mergeSort(nums[mid:])
-	return sortTwoSlice(nums1, nums2)
-}
-
-func sortTwoSlice(nums1, nums2 []int) []int {
-	nums := make([]int, 0, len(nums1)+len(nums2))
-	index1 := 0
-	index2 := 0
-
-	for index1 < len(nums1) || index2 < len(nums2) {
-		if index1 >= len(nums1) {
-			nums = append(nums, nums2[index2:]...)
-			break
-		}
-
-		if index2 >= len(nums2) {
-			nums = append(nums, nums1[index1:]...)
-			break
-		}
-
-		if nums1[index1] < nums2[index2] {
-			nums = append(nums, nums1[index1])
-			index1++
-		} else {
-			nums = append(nums, nums2[index2])
-			index2++
-		}
+	length := len(nums)
+	for i := length / 2; i >= 0; i-- {
+		heap(nums, length, i)
 	}
 
-	return nums
+	sortCount := 0
+	for i := length - 1; i > 0 && sortCount < k; i-- {
+		swap(nums, 0, i)
+		length--
+		heap(nums, length, 0)
+		sortCount++
+	}
+	return nums[len(nums)-k]
+}
+
+func heap(nums []int, length, index int) {
+	left := 2*index + 1
+	right := 2*index + 2
+
+	largest := index
+
+	if left < length && nums[left] > nums[largest] {
+		largest = left
+	}
+
+	if right < length && nums[right] > nums[largest] {
+		largest = right
+	}
+
+	if largest != index {
+		swap(nums, largest, index)
+		heap(nums, length, largest)
+	}
+}
+
+func swap(nums []int, i, j int) {
+	nums[i], nums[j] = nums[j], nums[i]
 }
