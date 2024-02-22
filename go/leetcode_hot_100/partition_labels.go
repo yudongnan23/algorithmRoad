@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func partitionLabels(s string) []int {
 	res := make([]int, 0)
 	d := make(map[byte]int, 0)
