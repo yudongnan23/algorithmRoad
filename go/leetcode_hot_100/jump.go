@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func jump(nums []int) int {
 	count, end, farthest := 0, 0, 0
 
