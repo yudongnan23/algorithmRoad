@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func maxProduct(nums []int) int {
 	size := len(nums)
 	maxRes, curMax, curMin := nums[0], nums[0], nums[0]
