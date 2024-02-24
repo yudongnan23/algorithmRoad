@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func majorityElement(nums []int) int {
 	candidate, count := 0, 0
 	for _, v := range nums {
