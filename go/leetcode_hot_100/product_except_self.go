@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 除自身以外数组的乘积
 func productExceptSelf(nums []int) []int {
 	size := len(nums)
 	res := make([]int, size)
