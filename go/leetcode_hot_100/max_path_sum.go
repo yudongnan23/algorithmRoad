@@ -4,7 +4,7 @@ const (
 	minNum = -(2 << 32)
 )
 
-// TODO three
+// TODO three - 二叉树中的最大路径和
 func maxPathSum(root *TreeNode) int {
 	maxLength := -(2 << 32)
 	maxLen := dfsIIII(root, &maxLength)
