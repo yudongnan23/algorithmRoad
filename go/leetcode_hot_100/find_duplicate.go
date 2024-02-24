@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 寻找重复数
 func findDuplicate(nums []int) int {
 	i := 0
 	for i < len(nums) {
