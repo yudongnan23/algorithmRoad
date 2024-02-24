@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 括号生成
 func generateParenthesis(n int) []string {
 	res := make([]string, 0, 1000)
 	var backtracking func(int, int, string)
