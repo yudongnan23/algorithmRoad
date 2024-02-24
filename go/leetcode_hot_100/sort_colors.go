@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 颜色分类
 func sortColors(nums []int) {
 	left := 0
 	right := len(nums) - 1
