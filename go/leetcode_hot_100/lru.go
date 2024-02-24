@@ -1,7 +1,7 @@
 package leetcode_hot_100
 
 // LRUCache
-// TODO three
+// TODO three - LRU 缓存
 type LRUCache struct {
 	head     *NodeX
 	tail     *NodeX
