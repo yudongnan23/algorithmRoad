@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 找到字符串中所有字母异位词
 func findAnagrams(s string, p string) []int {
 	targetSize := len(p)
 	pCount := [26]int{}
