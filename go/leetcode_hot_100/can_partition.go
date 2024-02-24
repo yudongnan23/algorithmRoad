@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 分割等和子集
 func canPartition(nums []int) bool {
 	sum := 0
 	for _, v := range nums {
