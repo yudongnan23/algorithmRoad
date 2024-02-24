@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 跳跃游戏II
 func jump(nums []int) int {
 	count, end, farthest := 0, 0, 0
 
