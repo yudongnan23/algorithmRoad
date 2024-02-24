@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 编辑距离
 func minDistance(word1 string, word2 string) int {
 	word1 = "-" + word1
 	word2 = "-" + word2
