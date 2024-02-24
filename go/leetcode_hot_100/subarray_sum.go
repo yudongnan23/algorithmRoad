@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 和为 K 的子数组
 func subarraySum(nums []int, k int) int {
 	m := map[int]int{0: 1}
 	var sum int
