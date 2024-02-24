@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 二叉树展开为链表
 func flatten(root *TreeNode) {
 	dfs(root)
 }
