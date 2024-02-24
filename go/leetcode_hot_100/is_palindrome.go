@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 回文链表
 func isPalindrome(head *ListNode) bool {
 	if head == nil {
 		return true
