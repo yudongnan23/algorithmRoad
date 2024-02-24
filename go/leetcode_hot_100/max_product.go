@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 乘积最大子数组
 func maxProduct(nums []int) int {
 	size := len(nums)
 	maxRes, curMax, curMin := nums[0], nums[0], nums[0]
