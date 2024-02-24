@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 最长公共子序列
 func longestCommonSubsequence(text1 string, text2 string) int {
 	text1 = "-" + text1
 	text2 = "-" + text2
