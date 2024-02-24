@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 划分字母区间
 func partitionLabels(s string) []int {
 	res := make([]int, 0)
 	d := make(map[byte]int, 0)
