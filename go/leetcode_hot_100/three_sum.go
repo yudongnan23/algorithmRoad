@@ -2,7 +2,7 @@ package leetcode_hot_100
 
 import "sort"
 
-// TODO three
+// TODO three - 三数之和
 func threeSum(nums []int) [][]int {
 	res := make([][]int, 0)
 
