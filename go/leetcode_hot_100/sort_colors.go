@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func sortColors(nums []int) {
 	left := 0
 	right := len(nums) - 1
