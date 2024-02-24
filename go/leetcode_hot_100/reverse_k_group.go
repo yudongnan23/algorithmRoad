@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - K 个一组翻转链表
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	if k <= 1 {
 		return head
