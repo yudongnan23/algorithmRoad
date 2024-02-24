@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 验证二叉搜索树
 const (
 	minVal = -(1 << 32)
 )
