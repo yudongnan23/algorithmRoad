@@ -1,7 +1,7 @@
 package leetcode_hot_100
 
 // Trie
-// TODO three
+// TODO three - 前缀树
 type Trie struct {
 	children [26]*Trie
 	isEnd    bool
