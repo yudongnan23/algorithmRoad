@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 课程表
 func canFinish(numCourses int, prerequisites [][]int) bool {
 	graph := make([][]int, numCourses)
 	inDeg := make([]int, numCourses)
