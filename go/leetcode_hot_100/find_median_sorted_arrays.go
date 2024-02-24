@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 寻找两个正序数组的中位数
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	if len(nums1) == 0 && len(nums2) == 0 {
 		return 0
