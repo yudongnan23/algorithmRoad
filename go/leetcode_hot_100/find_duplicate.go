@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func findDuplicate(nums []int) int {
 	i := 0
 	for i < len(nums) {
