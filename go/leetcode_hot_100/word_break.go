@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 单词拆分
 func wordBreak(s string, wordDict []string) bool {
 	dp := make([]bool, len(s)+1)
 	dp[0] = true
