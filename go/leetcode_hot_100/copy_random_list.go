@@ -1,7 +1,7 @@
 package leetcode_hot_100
 
 // Node
-// TODO three
+// TODO three - 随机链表的复制
 type Node struct {
 	Val    int
 	Next   *Node
