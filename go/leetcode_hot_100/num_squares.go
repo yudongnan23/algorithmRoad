@@ -3,7 +3,7 @@ package leetcode_hot_100
 var squareNums = make([]int, 0)
 var dp = []int{0}
 
-// TODO three
+// TODO three - 完全平方数
 func numSquares(n int) int {
 	if n < len(dp) {
 		return dp[n]
