@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 分割回文串
 func partition(s string) [][]string {
 	res := make([][]string, 0, 1000)
 	var search func(int, []string)
