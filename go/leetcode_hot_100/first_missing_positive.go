@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO three
+// TODO three - 缺失的第一个正数
 func firstMissingPositive(nums []int) int {
 	size := len(nums)
 	for i := 0; i < size; {
