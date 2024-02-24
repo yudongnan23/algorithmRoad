@@ -1,6 +1,6 @@
 package leetcode_hot_100
 
-// TODO again
+// TODO three
 func longestPalindrome(s string) string {
 	n := len(s)
 	dp := make([][]bool, n)
