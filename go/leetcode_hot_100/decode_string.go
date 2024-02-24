@@ -2,7 +2,7 @@ package leetcode_hot_100
 
 import "strconv"
 
-// TODO three
+// TODO three - 字符串解码
 func isWord(b byte) bool {
 	if b >= 'a' && b <= 'z' {
 		return true
